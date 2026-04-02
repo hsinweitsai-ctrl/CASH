@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>收支流水帳 | Expense Tracker</title>
+    <!-- Google Fonts: Outfit for clean, geometric look typical of modern minimal UI -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="header-top">
+                <h1><i class="fa-solid fa-wallet"></i> 財務紀錄</h1>
+                <button id="theme-toggle" class="theme-btn" aria-label="切換主題"><i class="fa-solid fa-moon"></i></button>
+            </div>
+            <p>簡單、清新的收支管理</p>
+        </header>
+
+        <!-- Dashboard -->
+        <section class="dashboard">
+            <div class="card balance-card">
+                <h3>目前的餘額</h3>
+                <h2 id="balance">$0</h2>
+            </div>
+            <div class="finance-summary">
+                <div class="summary-box income-box">
+                    <div class="icon-wrap"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                    <div class="info">
+                        <h4>總收入</h4>
+                        <p id="total-income">+$0</p>
+                    </div>
+                </div>
+                <div class="summary-box expense-box">
+                    <div class="icon-wrap"><i class="fa-solid fa-arrow-trend-down"></i></div>
+                    <div class="info">
+                        <h4>總支出</h4>
+                        <p id="total-expense">-$0</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="main-content">
+            <!-- Add Transaction Form -->
+            <section class="form-section card">
+                <h2>新增項目</h2>
+                <form id="transaction-form">
+                    <div class="form-group type-toggle">
+                        <input type="radio" id="type-expense" name="type" value="expense" checked>
+                        <label for="type-expense" class="toggle-btn expense-btn">支出</label>
+                        <input type="radio" id="type-income" name="type" value="income">
+                        <label for="type-income" class="toggle-btn income-btn">收入</label>
+                    </div>
+
+                    <div class="form-group input-has-icon">
+                        <label for="date">日期</label>
+                        <input type="date" id="date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="text">項目名稱</label>
+                        <input type="text" id="text" placeholder="例如：午餐、車資..." required autocomplete="off">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">類別</label>
+                        <select id="category">
+                            <option value="food">🍽 餐飲</option>
+                            <option value="transport">🚌 交通</option>
+                            <option value="shopping">🛒 購物</option>
+                            <option value="entertainment">🎬 娛樂</option>
+                            <option value="salary">💰 薪水</option>
+                            <option value="other">📦 其他</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="amount">金額</label>
+                        <input type="number" id="amount" placeholder="輸入金額..." min="1" required>
+                    </div>
+
+                    <button type="submit" class="submit-btn">儲存紀錄</button>
+                </form>
+            </section>
+
+            <!-- Transaction List -->
+            <section class="list-section card">
+                <div class="list-header">
+                    <h2>歷史紀錄</h2>
+                </div>
+                <ul id="transaction-list" class="transaction-list">
+                    <!-- Javascript Data Rendering -->
+                </ul>
+                <div id="empty-state" class="empty-state">
+                    <div class="empty-icon"><i class="fa-solid fa-receipt"></i></div>
+                    <p>尚未有任何紀錄</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Custom JS -->
+    <script src="app.js"></script>
+</body>
+</html>
