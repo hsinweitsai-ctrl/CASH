@@ -106,7 +106,33 @@
         </div>
     </div>
 
-    <!-- Custom JS -->
-    <script src="app.js"></script>
+    <!-- Custom JS (Modular Firebase Setup) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, onSnapshot, query, orderBy } 
+        from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyDAfyNAnii-0K7zpOpJSHwzd737T-l7Bzs",
+          authDomain: "cash-cb194.firebaseapp.com",
+          projectId: "cash-cb194",
+          storageBucket: "cash-cb194.firebasestorage.app",
+          messagingSenderId: "709088016297",
+          appId: "1:709088016297:web:a8e158179ae9ec5e4b36b8",
+          measurementId: "G-QG149DTPF3"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Export to window so app.js can use it
+        window.db = db;
+        window.fb = { collection, addDoc, getDocs, deleteDoc, doc, onSnapshot, query, orderBy };
+
+        // Load original app logic after Firebase is ready
+        const script = document.createElement('script');
+        script.src = 'app.js';
+        document.body.appendChild(script);
+    </script>
 </body>
 </html>
